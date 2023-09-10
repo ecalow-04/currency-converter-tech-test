@@ -1,3 +1,5 @@
+// util function that is used for getting a list of the available currency codes from the floatrates
+// api. I hardcode the british option since that is not included in the gbp conversion rates (makes sense)
 export const getCurrencyCodeOptions = () => {
   return fetch("https://www.floatrates.com/daily/gbp.json")
     .then((res) => {
