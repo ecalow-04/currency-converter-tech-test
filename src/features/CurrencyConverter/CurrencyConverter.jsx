@@ -14,11 +14,11 @@ import { object, number } from "yup";
 
 const inputSchema = object({
   value: number()
-    .typeError("Value required")
+    .typeError("Number input required")
     .required("Value required")
     .min(0, "Value cannot be negative")
     .test(
-      "",
+      "2-dp-exists",
       "Allowed 2 decimal places",
       (value) => !String(value).match(/^\d*\.\d{3,}$/),
     ),
