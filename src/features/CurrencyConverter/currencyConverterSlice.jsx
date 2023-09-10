@@ -71,15 +71,16 @@ export const currencyConverterSlice = createSlice({
       if (!state.validationErrors["primaryAmount"]) convertPrimaryAmount(state);
     },
   },
-  extraReducers: {
+  extraReducers: (builder) => {
     // Handle async action states
-    [getConversionRatesByCode.pending]: (state) => {
-      state.secondaryAmount = 0;
-    },
-    [getConversionRatesByCode.fulfilled]: (state, action) => {
-      state.conversionRates = action.payload;
-      convertPrimaryAmount(state);
-    },
+    builder
+      .addCase(getConversionRatesByCode.pending, (state) => {
+        state.secondaryAmount = 0;
+      })
+      .addCase(getConversionRatesByCode.fulfilled, (state, action) => {
+        state.conversionRates = action.payload;
+        convertPrimaryAmount(state);
+      });
   },
 });
 
