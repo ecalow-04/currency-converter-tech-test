@@ -25,9 +25,9 @@ const convertPrimaryAmount = (state) => {
 
 const initialState = {
   primaryCurrency: "gbp",
-  primaryAmount: "",
+  primaryAmount: 0,
   secondaryCurrency: "usd",
-  secondaryAmount: "",
+  secondaryAmount: 0,
   conversionRates: {},
   ratesLoadingState: "",
   validationErrors: {},
@@ -51,29 +51,27 @@ export const currencyConverterSlice = createSlice({
       const { error, value } = action.payload;
       state.primaryAmount = value;
       state.validationErrors["primaryAmount"] = error || null;
-      if (error) return;
-      convertPrimaryAmount(state);
+      if (!error) convertPrimaryAmount(state);
     },
     setPrimaryCurrency: (state, action) => {
       state.primaryCurrency = action.payload.value;
-      convertPrimaryAmount(state);
+      if (!state.validationErrors["primaryAmount"]) convertPrimaryAmount(state);
     },
     setSecondaryAmount: (state, action) => {
       const { error, value } = action.payload;
       state.secondaryAmount = value;
       state.validationErrors["secondaryAmount"] = error || null;
-      if (error) return;
-      convertSecondaryAmount(state);
+      if (!error) convertSecondaryAmount(state);
     },
     setSecondaryCurrency: (state, action) => {
       state.secondaryCurrency = action.payload.value;
-      convertPrimaryAmount(state);
+      if (!state.validationErrors["primaryAmount"]) convertPrimaryAmount(state);
     },
   },
   extraReducers: {
     // Handle async action states
     [getConversionRatesByCode.pending]: (state) => {
-      state.secondaryAmount = "";
+      state.secondaryAmount = 0;
     },
     [getConversionRatesByCode.fulfilled]: (state, action) => {
       state.conversionRates = action.payload;
