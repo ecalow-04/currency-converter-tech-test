@@ -71,6 +71,7 @@ export const currencyConverterSlice = createSlice({
     },
   },
   extraReducers: {
+    // Handle async action states
     [getConversionRatesByCode.pending]: (state) => {
       state.secondaryAmount = "";
     },
