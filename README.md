@@ -88,7 +88,18 @@ value has more than 2 decimal places.
 
 ## Testing
 
+Run:
+`npm run test`
+
 As of writing this, I have never created tests in React, although I have created some in Ember.js and elixir before so
 I understand the concept of testing. Unintentionally, I made my life harder by using Vite because that meant that the tried
 and tested and go-to test suite of React (Jest) isn't really supported in Vite so I had to go with the alternative Vitest,
 which could have been the reason I ran into a few issues when trying to make tests (see currencyConverterSlice.test.jsx).
+
+## Running the app
+
+Once you have cloned the repo run:
+`npm install`
+
+From then on, all you have to do to start the app is:
+`npm run dev`
