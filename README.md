@@ -72,7 +72,7 @@ Packages/languages used include:
   I have also included all of the logic for converting the currencies and getting the conversion rates in this file aswell because
   I felt it made sense to do so as it is where all of the state values are set, including conversion results.
 
-- **CurrencyConverter/currencyConverter.test** - Unit tests for the currency converter reducer.
+- **CurrencyConverter/currencyConverter.test** - Unit tests for the currency converter slice.
 
 ### Lib
 

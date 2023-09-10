@@ -64,7 +64,6 @@ const CurrencyConverter = () => {
                   placeholder="Enter Amount..."
                   className={"h-12 px-2 rounded-md"}
                   validationSchema={inputSchema}
-                  validationError={validationErrors["primaryAmount"]}
                   handleChange={(change) => dispatch(setPrimaryAmount(change))}
                 />
                 <Form.Dropdown
@@ -84,7 +83,6 @@ const CurrencyConverter = () => {
                   placeholder="Enter Amount..."
                   className={"h-12 px-2 rounded-md"}
                   validationSchema={inputSchema}
-                  validationError={validationErrors["secondaryAmount"]}
                   handleChange={(change) =>
                     dispatch(setSecondaryAmount(change))
                   }
