@@ -25,7 +25,7 @@ const convertPrimaryAmount = (state) => {
 
 const initialState = {
   primaryCurrency: "gbp",
-  primaryAmount: 0,
+  primaryAmount: 1,
   secondaryCurrency: "usd",
   secondaryAmount: 0,
   conversionRates: {},
@@ -75,6 +75,7 @@ export const currencyConverterSlice = createSlice({
     },
     [getConversionRatesByCode.fulfilled]: (state, action) => {
       state.conversionRates = action.payload;
+      convertPrimaryAmount(state);
     },
   },
 });
