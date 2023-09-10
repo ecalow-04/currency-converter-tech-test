@@ -15,7 +15,6 @@ import { object, number } from "yup";
 const inputSchema = object({
   value: number()
     .typeError("Number input required")
-    .required("Value required")
     .min(0, "Value cannot be negative")
     .test(
       "2-dp-exists",
