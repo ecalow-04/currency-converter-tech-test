@@ -40,11 +40,13 @@ const CurrencyConverter = () => {
   const [currencyCodes, setCurrencyCodes] = useState();
 
   useEffect(() => {
-    dispatch(getConversionRatesByCode("gbp"));
-    getCurrencyCodeOptions().then((data) => {
+    const fetchData = async () => {
+      await dispatch(getConversionRatesByCode(primaryCurrency));
+      const data = await getCurrencyCodeOptions();
       setCurrencyCodes(data);
       setLoadingState("success");
-    });
+    };
+    fetchData();
   }, []);
 
   return (
