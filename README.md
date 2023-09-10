@@ -86,6 +86,13 @@ I have used Yup for validation. Since it is not a big app, I only have 1 schema 
 includes checking for type, setting the field to be required, minimum value can only be 0 and a regex test for checking if the
 value has more than 2 decimal places.
 
+## Redux
+
+Before creating this app, I used the old way of redux state management, but I read that Redux Toolkit is now the favoured way of
+handling state, so I decided to pick it up and it was actually quite simple to implement when you have previous knowledge of using
+redux as it essentially just reduces how much code you have to write yourself and in my opinion becomes easier to understand what is
+going on.
+
 ## Testing
 
 Run:
