@@ -1,14 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// Helper functions for converting primary and secondary amounts
-const convertSecondaryAmount = (state) => {
-  state.validationErrors["primaryAmount"] = null;
-  state.primaryAmount = (
-    state.secondaryAmount *
-    state.conversionRates[state.secondaryCurrency].inverseRate
-  ).toFixed(2);
-};
-
+// Helper functions for converting primary and secondary amounts that also set the opposite field with the result,
+// separated them into 2 different functions as there is 1 case where we would want to convert the secondary amount
+// and set the primary amount with the result, but 3 cases vice versa. Also makes it more readable.
 const convertPrimaryAmount = (state) => {
   state.validationErrors["secondaryAmount"] = null;
   if (
@@ -21,6 +15,14 @@ const convertPrimaryAmount = (state) => {
       state.primaryAmount * state.conversionRates[state.secondaryCurrency].rate
     ).toFixed(2);
   }
+};
+
+const convertSecondaryAmount = (state) => {
+  state.validationErrors["primaryAmount"] = null;
+  state.primaryAmount = (
+    state.secondaryAmount *
+    state.conversionRates[state.secondaryCurrency].inverseRate
+  ).toFixed(2);
 };
 
 const initialState = {
@@ -47,6 +49,7 @@ export const currencyConverterSlice = createSlice({
   name: "CurrencyConverter",
   initialState,
   reducers: {
+    // Separated into 4 actions so that it is more readable and self-explanatory as to what is happening
     setPrimaryAmount: (state, action) => {
       const { error, value } = action.payload;
       state.primaryAmount = value;
