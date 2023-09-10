@@ -98,8 +98,6 @@ which could have been the reason I ran into a few issues when trying to make tes
 
 ## Running the app
 
-Once you have cloned the repo run:
-`npm install`
+Install packages: `npm install`
 
-From then on, all you have to do to start the app is:
-`npm run dev`
+Start app: `npm run dev`
