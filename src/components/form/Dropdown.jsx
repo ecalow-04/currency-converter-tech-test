@@ -1,4 +1,4 @@
-/*
+/**
  * Callback for when a new option is selected
  *
  * @callback handleChange
@@ -12,7 +12,7 @@
  * @param {string} options[].value - Sets the value of the option
  * @param {string} options[].name - Sets the text displayed in the option
  * @param {string} [className] - CSS class to apply to dropdown
- * @param {handleChange} handleChange - Function to run when selected option is changed
+ * @param {handleChange} handleChange - Callback to be triggered on change
  */
 
 const Dropdown = ({ value, options, className, handleChange }) => {
