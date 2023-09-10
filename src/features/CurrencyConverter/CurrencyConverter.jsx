@@ -9,7 +9,7 @@ import {
   setSecondaryCurrency,
   getConversionRatesByCode,
 } from "./currencyConverterSlice";
-import { getCurrencyCodeOptions } from "../../lib/currencyCodes";
+import { getCurrencyCodeOptions } from "../../utils/currencyCodes";
 import { object, number } from "yup";
 
 const inputSchema = object({
