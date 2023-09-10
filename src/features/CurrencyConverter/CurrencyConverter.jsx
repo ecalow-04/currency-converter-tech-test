@@ -35,6 +35,7 @@ const CurrencyConverter = () => {
     validationErrors,
   } = useSelector((state) => state.currencyConverter);
 
+  // reflects the state of the request to get the currency codes
   const [loadingState, setLoadingState] = useState("loading");
   const [currencyCodes, setCurrencyCodes] = useState();
 
@@ -61,7 +62,9 @@ const CurrencyConverter = () => {
                   value={primaryAmount}
                   type="number"
                   placeholder="Enter Amount..."
-                  className={"h-12 px-2 rounded-md"}
+                  className={
+                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                  }
                   validationSchema={inputSchema}
                   handleChange={({ error, value }) =>
                     dispatch(setPrimaryAmount({ error, value }))
@@ -70,7 +73,9 @@ const CurrencyConverter = () => {
                 <Form.Dropdown
                   value={primaryCurrency}
                   options={currencyCodes}
-                  className={"h-12 px-2 rounded-md"}
+                  className={
+                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                  }
                   handleChange={async (value) => {
                     await dispatch(getConversionRatesByCode(value));
                     dispatch(setPrimaryCurrency({ value }));
@@ -82,14 +87,18 @@ const CurrencyConverter = () => {
                   value={secondaryAmount}
                   type="number"
                   placeholder="Enter Amount..."
-                  className={"h-12 px-2 rounded-md"}
+                  className={
+                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                  }
                   validationSchema={inputSchema}
                   handleChange={({ error, value }) =>
                     dispatch(setSecondaryAmount({ error, value }))
                   }
                 />
                 <Form.Dropdown
-                  className={"h-12 px-2 rounded-md"}
+                  className={
+                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                  }
                   value={secondaryCurrency}
                   options={currencyCodes}
                   handleChange={(value) =>
