@@ -9,20 +9,12 @@ import currencyConverterReducer, {
   getConversionRatesByCode,
 } from "./currencyConverterSlice";
 
-// possible tests to do:
-//
-// typing in primary amount when valid, changes secondaryAmount
-// typing in primary amount when invalid, doesn't change secondary amount
-// changing primary currency changes secondary amount
-// changing secondary currency changes secondary amount
-// changing seconday amount changes primary amount
-
 describe("Testing Currency Converter Feature", () => {
   const mockInitialState = {
     primaryCurrency: "gbp",
-    primaryAmount: "",
+    primaryAmount: 0,
     secondaryCurrency: "usd",
-    secondaryAmount: "",
+    secondaryAmount: 0,
     conversionRates: {
       usd: { name: "U.S. Dollar", rate: 1.249, inverseRate: 0.801 },
       eur: { name: "Euro", rate: 1.166, inverseRate: 0.859 },
@@ -64,7 +56,7 @@ describe("Testing Currency Converter Feature", () => {
   // it's not making a deep copy of the nested objects and that could be causing an issue somewhere in the plugin
 
   test("setting primary amount with a valid value changes secondary amount", () => {
-    const action = setPrimaryAmount({ error: undefined, value: 5 });
+    const action = setPrimaryAmount({ value: 5 });
     const rate =
       mockInitialState.conversionRates[mockInitialState.secondaryCurrency].rate;
 
@@ -81,6 +73,17 @@ describe("Testing Currency Converter Feature", () => {
       .toHaveProperty("secondaryAmount", mockInitialState.secondaryAmount);
   });
 
+  test("changing secondary amount, changes primary amount", () => {
+    const action = setSecondaryAmount({ value: 5 });
+    const rate =
+      mockInitialState.conversionRates[mockInitialState.secondaryCurrency]
+        .inverseRate;
+
+    expect(currencyConverterReducer(mockInitialState, action))
+      .toHaveProperty("secondaryAmount", 5)
+      .toHaveProperty("primaryAmount", (5 * rate).toFixed(2));
+  });
+
   test("changing primary currency, changes secondary amount", () => {
     const action = setPrimaryCurrency({ value: "usd" });
 
@@ -89,5 +92,16 @@ describe("Testing Currency Converter Feature", () => {
     expect(currencyConverterReducer(mockInitialState, action))
       .toHaveProperty("primaryCurrency", "usd")
       .toHaveProperty("secondaryAmount", 5);
+  });
+
+  test("changing secondary currency, changes secondary amount", () => {
+    const action = setSecondaryCurrency({ value: "cad" });
+    const rate = mockInitialState.conversionRates["cad"].rate;
+
+    mockInitialState.primaryAmount = 5;
+
+    expect(currencyConverterReducer(mockInitialState, action))
+      .toHaveProperty("secondaryCurrency", "cad")
+      .toHaveProperty("secondaryAmount", (5 * rate).toFixed(2));
   });
 });
