@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const updatePrimaryAmount = (state) => {
+// Helper functions for converting primary and secondary amounts
+const convertSecondaryAmount = (state) => {
   state.validationErrors["primaryAmount"] = null;
   state.primaryAmount = (
     state.secondaryAmount *
@@ -8,7 +9,7 @@ const updatePrimaryAmount = (state) => {
   ).toFixed(2);
 };
 
-const updateSecondaryAmount = (state) => {
+const convertPrimaryAmount = (state) => {
   state.validationErrors["secondaryAmount"] = null;
   if (
     state.primaryAmount == "" ||
@@ -43,7 +44,7 @@ export const getConversionRatesByCode = createAsyncThunk(
 );
 
 export const currencyConverterSlice = createSlice({
-  name: "Currency Converter",
+  name: "CurrencyConverter",
   initialState,
   reducers: {
     setPrimaryAmount: (state, action) => {
@@ -51,22 +52,22 @@ export const currencyConverterSlice = createSlice({
       state.primaryAmount = value;
       state.validationErrors["primaryAmount"] = error || null;
       if (error) return;
-      updateSecondaryAmount(state);
+      convertPrimaryAmount(state);
     },
     setPrimaryCurrency: (state, action) => {
       state.primaryCurrency = action.payload.value;
-      updateSecondaryAmount(state);
+      convertPrimaryAmount(state);
     },
     setSecondaryAmount: (state, action) => {
       const { error, value } = action.payload;
       state.secondaryAmount = value;
       state.validationErrors["secondaryAmount"] = error || null;
       if (error) return;
-      updatePrimaryAmount(state);
+      convertSecondaryAmount(state);
     },
     setSecondaryCurrency: (state, action) => {
       state.secondaryCurrency = action.payload.value;
-      updateSecondaryAmount(state);
+      convertPrimaryAmount(state);
     },
   },
   extraReducers: {
