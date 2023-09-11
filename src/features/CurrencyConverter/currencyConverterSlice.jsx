@@ -32,6 +32,7 @@ const initialState = {
   secondaryAmount: 0,
   conversionRates: {},
   validationErrors: {},
+  ratesLoading: false,
 };
 
 export const getConversionRatesByCode = createAsyncThunk(
@@ -75,9 +76,11 @@ export const currencyConverterSlice = createSlice({
     builder
       .addCase(getConversionRatesByCode.pending, (state) => {
         state.secondaryAmount = 0;
+        state.ratesLoading = true;
       })
       .addCase(getConversionRatesByCode.fulfilled, (state, action) => {
         state.conversionRates = action.payload;
+        state.ratesLoading = false;
       });
   },
 });

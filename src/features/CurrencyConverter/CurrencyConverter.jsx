@@ -32,6 +32,7 @@ const CurrencyConverter = () => {
     secondaryAmount,
     conversionRates,
     validationErrors,
+    ratesLoading,
   } = useSelector((state) => state.currencyConverter);
 
   // reflects the state of the request to get the currency codes
@@ -95,6 +96,7 @@ const CurrencyConverter = () => {
                   value={secondaryAmount}
                   type="number"
                   placeholder="Enter Amount..."
+                  loading={ratesLoading}
                   className={
                     "w-full border-gray border-2 dark:border-none h-12 px-2 rounded-md"
                   }

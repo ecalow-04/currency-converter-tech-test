@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
  * @param {string} type - Input type, e.g. 'number' or 'text'
  * @param {string} [placeholder] - Text to display when the value is empty
  * @param {boolean} [disabled] - Set whether the input can be changed or not
+ * @param {boolean} [loading] - Determines whether the input box will display that it's loading or not
  * @param {string} [className] - CSS class to apply to the input
  * @param [validationSchema] - Yup object to validate against input
  * @param {handleChange} handleChange - Callback to be triggered on change
@@ -26,6 +27,7 @@ const Input = ({
   type,
   placeholder,
   disabled,
+  loading,
   className,
   validationSchema,
   handleChange,
@@ -52,32 +54,40 @@ const Input = ({
   };
 
   return (
-    <div>
-      <input
-        className={
-          validationError
-            ? `${className} ring ring-red-500 focus:outline-none`
-            : className
-        }
-        value={value}
-        type={type}
-        placeholder={placeholder}
-        onKeyDown={(evt) => {
-          // put this in as when pressing any characters that respresent numerical values or a mathematical sign, it would clear the input
-          if (type == "number") {
-            ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault();
-          }
-        }}
-        onChange={async (event) => {
-          const result = await validate(event.target.value);
-          handleChange(result);
-        }}
-        disabled={disabled}
-      />
-      {validationError && (
-        <p className="mt-1 text-red-400 text-sm">{validationError}</p>
+    <>
+      {loading == true ? (
+        <div>
+          <input className={className} value="Loading..." disabled={true} />
+        </div>
+      ) : (
+        <div>
+          <input
+            className={
+              validationError
+                ? `${className} ring ring-red-500 focus:outline-none`
+                : className
+            }
+            value={value}
+            type={type}
+            placeholder={placeholder}
+            onKeyDown={(evt) => {
+              // put this in as when pressing any characters that respresent numerical values or a mathematical sign, it would clear the input
+              if (type == "number") {
+                ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault();
+              }
+            }}
+            onChange={async (event) => {
+              const result = await validate(event.target.value);
+              handleChange(result);
+            }}
+            disabled={disabled}
+          />
+          {validationError && (
+            <p className="mt-1 text-red-400 text-sm">{validationError}</p>
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
