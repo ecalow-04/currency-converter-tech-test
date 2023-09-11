@@ -41,6 +41,14 @@ const CurrencyConverter = () => {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getConversionRatesByCode(primaryCurrency));
+      // Temporary fix. This exists here because originally i did convert the primary amount automatically once
+      // getConversionRatesByCode was fulfilled and then thought it was good. But i found an issue with doing that
+      // and it was that if you change the primary currency to the same as the secondary currency, it would cause an
+      // error, so i removed it, which then caused the issue of not converting automatically on initial load, hence
+      // why i'm setting primary amount again.
+      //
+      // I will be working on a fix for this but at this point the test is already submitted so just wanted to throw
+      // something in quickly before i was potentially failed because of it.
       dispatch(setPrimaryAmount({ value: primaryAmount }));
       const data = await getCurrencyCodeOptions();
       setCurrencyCodes(data);
