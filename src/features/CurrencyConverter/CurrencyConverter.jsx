@@ -42,6 +42,7 @@ const CurrencyConverter = () => {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getConversionRatesByCode(primaryCurrency));
+      dispatch(setPrimaryAmount({ value: primaryAmount }));
       const data = await getCurrencyCodeOptions();
       setCurrencyCodes(data);
       setLoadingState("success");

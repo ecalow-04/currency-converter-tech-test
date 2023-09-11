@@ -79,7 +79,6 @@ export const currencyConverterSlice = createSlice({
       })
       .addCase(getConversionRatesByCode.fulfilled, (state, action) => {
         state.conversionRates = action.payload;
-        convertPrimaryAmount(state);
       });
   },
 });
