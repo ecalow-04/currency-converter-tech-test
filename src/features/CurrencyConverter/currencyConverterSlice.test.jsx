@@ -20,7 +20,6 @@ describe("Testing Currency Converter Feature", () => {
       eur: { name: "Euro", rate: 1.166, inverseRate: 0.859 },
       cad: { name: "Canadian Dollar", rate: 1.705, inverseRate: 0.587 },
     },
-    ratesLoadingState: "",
     validationErrors: {},
   };
 

@@ -31,7 +31,6 @@ const initialState = {
   secondaryCurrency: "usd",
   secondaryAmount: 0,
   conversionRates: {},
-  ratesLoadingState: "",
   validationErrors: {},
 };
 

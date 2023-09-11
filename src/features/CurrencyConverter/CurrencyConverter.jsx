@@ -31,7 +31,6 @@ const CurrencyConverter = () => {
     secondaryCurrency,
     secondaryAmount,
     conversionRates,
-    ratesLoadingState,
     validationErrors,
   } = useSelector((state) => state.currencyConverter);
 
