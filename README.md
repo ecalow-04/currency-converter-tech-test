@@ -74,7 +74,7 @@ Packages/languages used include:
 
 - **CurrencyConverter/currencyConverter.test** - Unit tests for the currency converter slice.
 
-### Lib
+### Utils
 
 - **currencyCodes** - Contains a function for getting currency codes that get passed down to the dropdown components, these codes
   are retrieved from making a request to the floatrates API. Originally, this file did contain the logic the getting conversion
