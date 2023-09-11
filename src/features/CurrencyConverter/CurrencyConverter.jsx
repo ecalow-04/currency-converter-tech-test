@@ -35,8 +35,6 @@ const CurrencyConverter = () => {
     ratesLoading,
   } = useSelector((state) => state.currencyConverter);
 
-  // reflects the state of the request to get the currency codes
-  const [loadingState, setLoadingState] = useState("loading");
   const [currencyCodes, setCurrencyCodes] = useState();
 
   useEffect(() => {
@@ -53,14 +51,13 @@ const CurrencyConverter = () => {
       dispatch(setPrimaryAmount({ value: primaryAmount }));
       const data = await getCurrencyCodeOptions();
       setCurrencyCodes(data);
-      setLoadingState("success");
     };
     fetchData();
   }, []);
 
   return (
     <>
-      {loadingState == "loading" ? (
+      {!currencyCodes ? (
         <Spinner />
       ) : (
         <>
