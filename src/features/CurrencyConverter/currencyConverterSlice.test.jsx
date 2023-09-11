@@ -26,11 +26,11 @@ describe("Testing Currency Converter Feature", () => {
 
   // FYI: i have never written tests in React before, but i have a little bit of experience in ember.js and elixir
   //
-  // i'm using expect().toHaveProperty() instead of expect().toEqual() because
-  // i believe there is either a bug with the vitest plugin, there's some configuration i haven't set that i should have, or i'm simply writing these tests wrong.
+  // i'm using expect().toHaveProperty() instead of expect().toEqual() because i believe there is either a bug with
+  // the vitest plugin, there's some configuration i haven't set that i should have, or i'm simply writing these tests wrong.
   // i went down a very big rabbit hole of trying to fix my issue, and saw that people were experiencing similar issues with Jest
   // but apparently that is now fixed, however i also read Jest isn't fully supported with Vite, hence the creation of Vitest
-  // so i decided to carry on and try to find a workaround for now.
+  // so i decided to carry on and try to find a workaround for now. If i'm missing something please let me know.
   //
   // below is an example of a test i'd expect to work and the error it raises:
   //
@@ -52,8 +52,9 @@ describe("Testing Currency Converter Feature", () => {
   //
   // Raises TypeError: Cannot assign to read only property 'usd' of object '#<Object>'
   //
-  // i can imagine it's to do with the fact that when trying to make a deep copy of the expectedState,
-  // it's not making a deep copy of the nested objects and that could be causing an issue somewhere in the plugin
+  // i can imagine it could be to do with immer freezing the original object (mockInitialState), so when the test suite is trying to make
+  // a deep copy of the expectedState, it's not making a deep copy of the nested objects and that could be causing this issue,
+  // but that's just a guess and i could be completely off
 
   test("setting primary amount with a valid value changes secondary amount", () => {
     const action = setPrimaryAmount({ value: 5 });
