@@ -62,6 +62,12 @@ const Input = ({
         value={value}
         type={type}
         placeholder={placeholder}
+        onKeyDown={(evt) => {
+          // put this in as when pressing any characters that respresent numerical values or a mathematical sign, it would clear the input
+          if (type == "number") {
+            ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault();
+          }
+        }}
         onChange={async (event) => {
           const result = await validate(event.target.value);
           handleChange(result);
