@@ -19,10 +19,14 @@ const convertPrimaryAmount = (state) => {
 
 const convertSecondaryAmount = (state) => {
   state.validationErrors["primaryAmount"] = null;
-  state.primaryAmount = (
-    state.secondaryAmount *
-    state.conversionRates[state.secondaryCurrency].inverseRate
-  ).toFixed(2);
+  if (state.primaryCurrency === state.secondaryCurrency) {
+    state.primaryAmount = state.secondaryAmount;
+  } else {
+    state.primaryAmount = (
+      state.secondaryAmount *
+      state.conversionRates[state.secondaryCurrency].inverseRate
+    ).toFixed(2);
+  }
 };
 
 const initialState = {
