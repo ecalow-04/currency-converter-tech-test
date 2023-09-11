@@ -55,7 +55,7 @@ const CurrencyConverter = () => {
         <Spinner />
       ) : (
         <>
-          <div className="mx-auto px-5 py-5 bg-gray border-2 rounded-lg my-auto">
+          <div className="p-5 bg-gray border-2 rounded-lg">
             <div className="flex flex-col space-y-2">
               <div className="flex flex-row space-x-2">
                 <Form.Input
