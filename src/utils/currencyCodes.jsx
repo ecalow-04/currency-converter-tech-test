@@ -14,6 +14,9 @@ export const getCurrencyCodeOptions = () => {
           name: data[key].name,
         });
       });
+      codes = codes.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+      });
       return codes;
     });
 };
