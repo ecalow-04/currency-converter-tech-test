@@ -57,13 +57,13 @@ const CurrencyConverter = () => {
         <>
           <div className="p-5 bg-gray border-2 rounded-lg">
             <div className="flex flex-col space-y-2">
-              <div className="flex flex-row space-x-2">
+              <div className="flex flex-row w-full space-x-2">
                 <Form.Input
                   value={primaryAmount}
                   type="number"
                   placeholder="Enter Amount..."
                   className={
-                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                    "w-full border-gray border-2 dark:border-none h-12 px-2 rounded-md"
                   }
                   validationSchema={inputSchema}
                   handleChange={({ error, value }) =>
@@ -74,7 +74,7 @@ const CurrencyConverter = () => {
                   value={primaryCurrency}
                   options={currencyCodes}
                   className={
-                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                    "w-full truncate border-gray border-2 dark:border-none h-12 px-2 rounded-md"
                   }
                   handleChange={async (value) => {
                     await dispatch(getConversionRatesByCode(value));
@@ -82,13 +82,13 @@ const CurrencyConverter = () => {
                   }}
                 />
               </div>
-              <div className="flex flex-row space-x-2">
+              <div className="flex flex-row w-full space-x-2">
                 <Form.Input
                   value={secondaryAmount}
                   type="number"
                   placeholder="Enter Amount..."
                   className={
-                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                    "w-full border-gray border-2 dark:border-none h-12 px-2 rounded-md"
                   }
                   validationSchema={inputSchema}
                   handleChange={({ error, value }) =>
@@ -97,7 +97,7 @@ const CurrencyConverter = () => {
                 />
                 <Form.Dropdown
                   className={
-                    "border-gray border-2 dark:border-none h-12 px-2 rounded-md"
+                    "w-full truncate border-gray border-2 dark:border-none h-12 px-2 rounded-md"
                   }
                   value={secondaryCurrency}
                   options={currencyCodes}
